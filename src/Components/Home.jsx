@@ -2,13 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaImage } from "react-icons/fa";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { MdCloudDone } from "react-icons/md";
 import Navbar from "./Navbar";
 import Post from "./Post";
 
 const Home = () => {
   const containerRef = useRef(null);
   const [expanded, setExpanded] = useState(false);
+  
   const [blogs, setBlogs] = useState([]);
   const [file, setFile] = useState(null);
   const [loader, setLoader] = useState(false);
@@ -20,6 +21,10 @@ const Home = () => {
   const getAllBlogs = async () => {
     console.log("still not blinking");
   };
+
+  const handleSubmit = async ()=>{
+    console.log("submitting the blog")
+  }
 
   //section for handling the Collaps of the div that contain the inputs
   const handleExpand = () => {
@@ -74,7 +79,7 @@ const Home = () => {
                 <div>
                   <FaImage />
                 </div>
-                <IoIosCloseCircleOutline />
+                <MdCloudDone onClick={handleSubmit}/>
               </div>
             </>
           )}
