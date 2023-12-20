@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { userSlice } from "./userStore.js";
-
+import { userLoginSlice } from "./userStore.js";
 
 const persistConfig = { key: "userLogin", storage, version: 1 };
-const userLoginPersistedReducer = persistReducer(persistConfig, userSlice.reducer);
-
+const userLoginPersistedReducer = persistReducer(persistConfig, userLoginSlice.reducer);
 
 export const store = configureStore({
     reducer: {

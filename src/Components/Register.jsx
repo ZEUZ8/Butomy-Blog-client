@@ -32,8 +32,10 @@ const Register = ({ page }) => {
       const response = await LoginAPI({ email: email, password: password });
       console.log(response, " the response");
       if (response.status === 201) {
-        const result = response.data;
+        const result = response?.data;
+        console.log(result,' the result')
         // message.success(`welcome ${result.dispatch.name}`);
+        console.log(result.dispatch)
         dispatch(setLogin(result?.dispatch));
         navigate("/");
       } else {

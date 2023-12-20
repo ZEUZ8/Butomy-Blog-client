@@ -3,7 +3,7 @@ import { AxiosURL } from "../BaseUrl";
 export const BlogCreate = async (data, token) => {
     
     try {
-        const response = AxiosURL.post("/create-blog", data, {
+        const response = AxiosURL.post("/blog", data, {
             headers: { Authorization: "Bearer " + token },
         });
         return response;

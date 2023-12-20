@@ -1,6 +1,6 @@
 import React from "react";
 
-const Post = () => {
+const Post = ({data}) => {
   return (
     <>
       <div class="group relative m-10 h-96 w-96 overflow-hidden rounded-lg shadow-md bg-gray-700">
@@ -11,7 +11,7 @@ const Post = () => {
             alt=""
           />
           <h1 class="mt-4 px-4 text-center font-serif text-xl font-semibold text-rose-500">
-            Portugal's Hot Baloon Festival
+            {data?.title}
           </h1>
           <p class="mt-1 px-4 text-center">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam,
@@ -24,10 +24,7 @@ const Post = () => {
             Portugal's Hot Baloon Festival
           </h1>
           <p class="px-8 text-center">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero
-            deserunt quisquam aperiam, voluptas esse minima. Tenetur odit rem
-            ducimus incidunt quas, voluptates obcaecati, sint amet sit provident
-            quis nam repellat, odio repellendus recusandae. Error, repudiandae?
+           {data.content}
           </p>
         </div>
       </div>

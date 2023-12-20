@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { GetAllBlog,BlogCreate } from "../Api/services/blog";
 import { useSelector } from "react-redux";
 import { FaImage } from "react-icons/fa";
 import { MdCloudDone } from "react-icons/md";
@@ -8,23 +9,52 @@ import Post from "./Post";
 
 const Home = () => {
   const containerRef = useRef(null);
+
   const [expanded, setExpanded] = useState(false);
-  
   const [blogs, setBlogs] = useState([]);
-  const [file, setFile] = useState(null);
   const [loader, setLoader] = useState(false);
+  const [file, setFile] = useState(null);
+
   const [image, setImage] = useState(null);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-  const token = useSelector((state) => state?.userLogin?.token);
-//   const navigate = useNavigate();
- 
+  const token = useSelector((state) => state?.userLogin);
+  // const navigate = useNavigate();
+
   const getAllBlogs = async () => {
-    console.log("still not blinking");
+    setLoader(true);
+    const response = await GetAllBlog();
+    if (response.status === 202) {
+      const data = response.data;
+      // if (token) {
+      //   setBlogs(data.result);
+      // } else {
+      //   const firstPart = data.result.slice(0, 3);
+      //   setBlogs(firstPart);
+      // }
+      // setBlogs(response?.data?.)
+      setBlogs(response?.data?.result);
+      setLoader(false);
+    } else {
+      console.log("No blog");
+    }
   };
-
-  const handleSubmit = async ()=>{
-    console.log("submitting the blog")
-  }
+  console.log(token.id,' theid ih the outside')
+  const handleSubmit = async () => {
+    console.log(token.id,' the id')
+    const response = await BlogCreate({ id:token?.id,title: title, content: content },token?.token);
+    if (response.status === 201) {
+      setTitle("")
+      setContent("")
+      // message.success("blog posted");
+      setBlogs((prevBlogs) => [...prevBlogs, response?.data?.blogDoc]);
+    } else {
+      // message.warning("something went wrong");
+      setContent("");
+      setTitle("");
+    }
+  };
 
   //section for handling the Collaps of the div that contain the inputs
   const handleExpand = () => {
@@ -39,9 +69,11 @@ const Home = () => {
       handleCollapse();
     }
   };
+
   useEffect(() => {
-    console.log("remember me");
+    getAllBlogs();
   }, []);
+
   return (
     <>
       <div className="w-full grid m-0 ">
@@ -63,6 +95,8 @@ const Home = () => {
           <input
             onFocus={handleExpand}
             type="text"
+            value={title}
+            onChange={(e)=>setTitle(e.target.value)}
             className={`p-4  w-full bg-[#242424] text-white rounded-sm`}
             placeholder="Title "
             style={{ outline: "none", ":focus": { outline: "none" } }}
@@ -71,6 +105,8 @@ const Home = () => {
             <>
               <textarea
                 type="text"
+                value={content}
+                onChange={(e) => setContent(e.target.value)} 
                 className="px-4 w-full bg-[#242424] text-white rounded-sm"
                 placeholder="Take a Note.."
                 style={{ outline: "none", ":focus": { outline: "none" } }}
@@ -79,7 +115,7 @@ const Home = () => {
                 <div>
                   <FaImage />
                 </div>
-                <MdCloudDone onClick={handleSubmit}/>
+                <MdCloudDone onClick={handleSubmit} />
               </div>
             </>
           )}
@@ -91,8 +127,10 @@ const Home = () => {
         <input type="text" className="p-2" placeholder="Take a Note.." style={{focus:{outline:"none"}}}/>
       </div> */}
 
-      <div onClick={handleOutsideClick}>
-        <Post />
+      <div onClick={handleOutsideClick} className="flex">
+        {blogs.map((data) => {
+          return <Post key={data.id} data={data} />
+        })}
       </div>
     </>
   );

@@ -4,13 +4,14 @@ const Navbar = () => {
   return (
     <>
       <nav class="bg-white border-gray-200 dark:bg-[#434343] w-full">
-        <div class="max-w-screen-xl flex flex-wrap items-center  mx-auto p-2">
+        <div class="max-w-screen-xl flex flex-wrap items-center  justify-between mx-auto p-2">
           <a
             href="https://www.butomy.com/"
             class="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img class="w-[200px] lg-[177px]  pt-1 object-contain" src="https://www.butomy.com/frontend/img/logo-white.png"></img>
           </a>
+          <p>Profile</p>
           {/* <div class="flex md:order-2">
             <button
               type="button"
@@ -87,7 +88,7 @@ const Navbar = () => {
               </svg>
             </button>
           </div> */}
-          <div
+          {/* <div
             class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
             id="navbar-search"
           >
@@ -117,7 +118,7 @@ const Navbar = () => {
                 placeholder="Search..."
               />
             </div>
-          </div>
+          </div> */}
         </div>
       </nav>
       
