@@ -15,8 +15,8 @@ const Home = () => {
   const [image, setImage] = useState(null);
 
   const token = useSelector((state) => state?.userLogin?.token);
-  const navigate = useNavigate();
-
+//   const navigate = useNavigate();
+ 
   const getAllBlogs = async () => {
     console.log("still not blinking");
   };
