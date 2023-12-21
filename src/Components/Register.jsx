@@ -21,7 +21,6 @@ const Register = ({ page }) => {
     }, 3000);
   };
 
-  console.log(errMsg, " the message");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -35,7 +34,6 @@ const Register = ({ page }) => {
         const result = response?.data;
         console.log(result,' the result')
         // message.success(`welcome ${result.dispatch.name}`);
-        console.log(result.dispatch)
         dispatch(setLogin(result?.dispatch));
         navigate("/");
       } else {

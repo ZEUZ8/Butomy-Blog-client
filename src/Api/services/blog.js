@@ -46,10 +46,10 @@ export const DeleteBlog = async (id, token) => {
     }
 };
 
-export const editBlog = async ({title,content,id,token}) => {
+export const editBlog = async ({title,summary,img,content,id,token}) => {
     console.log(id,' th')
     try {
-        const response = AxiosURL.put(`/edit`, {id,title,content}, {
+        const response = AxiosURL.put(`/edit`, {id,title,img,summary,content}, {
             headers: { Authorization: "Bearer " + token },
         });
         return response;
