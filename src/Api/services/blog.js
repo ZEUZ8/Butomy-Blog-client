@@ -35,6 +35,7 @@ export const SingleBlog = async (id) => {
 };
 export const DeleteBlog = async (id, token) => {
     try {
+        console.log(id)
         const response = AxiosURL.delete(`/blog/${id}`, {
             headers: { Authorization: "Bearer " + token },
         });
@@ -45,9 +46,10 @@ export const DeleteBlog = async (id, token) => {
     }
 };
 
-export const EditBlogAPI = async (data, token) => {
+export const editBlog = async ({title,content,id,token}) => {
+    console.log(id,' th')
     try {
-        const response = AxiosURL.put(`/edit`, data, {
+        const response = AxiosURL.put(`/edit`, {id,title,content}, {
             headers: { Authorization: "Bearer " + token },
         });
         return response;
@@ -56,3 +58,16 @@ export const EditBlogAPI = async (data, token) => {
         return error?.response;
     }
 };
+
+export const GetUserBlogs = async (id, token) => {
+    try {
+        const response = AxiosURL.get(`/blogs/${id}`, {
+            headers: { Authorization: "Bearer " + token },
+        });
+        return response;
+    } catch (error) {
+       
+        return error?.response;
+    }
+};
+

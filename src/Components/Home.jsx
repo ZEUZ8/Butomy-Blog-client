@@ -129,7 +129,7 @@ const Home = () => {
 
       <div onClick={handleOutsideClick} className="flex">
         {blogs.map((data) => {
-          return <Post key={data.id} data={data} />
+          return <Post key={data.id} data={data} auther={false}/>
         })}
       </div>
     </>

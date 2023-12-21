@@ -1,9 +1,14 @@
 import React from "react";
+import { MdDelete } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 
-const Post = ({data}) => {
+const Post = ({ data }) => {
+  const editblog = (id)=>{
+    console.log(id,' the name')
+  }
   return (
     <>
-      <div class="group relative m-10 h-96 w-96 overflow-hidden rounded-lg shadow-md bg-gray-700">
+      <div class="group relative m-10 h-96 w-96 overflow-hidden rounded-lg shadow-md bg-gray-700" onClick={()=>editblog(data._id)}>
         <div class="absolute left-0 top-0 h-full w-full transition-all duration-300 ease-in-out group-hover:-top-96">
           <img
             class="h-4/6 w-full object-cover"
@@ -23,10 +28,9 @@ const Post = ({data}) => {
           <h1 class="mb-2 px-8 text-center font-serif text-xl font-semibold text-rose-500">
             Portugal's Hot Baloon Festival
           </h1>
-          <p class="px-8 text-center">
-           {data.content}
-          </p>
+          <p class="px-8 text-center">{data.content}</p>
         </div>
+
       </div>
     </>
   );
