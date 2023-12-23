@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import './App.css'
 import Home from "./Components/Home";
-import Register from "./Components/register";
+import Register from "./Components/Register";
 import Profile from "./Components/Profile";
 import SingleBlog from "./Components/SingleBlog";
 import { useSelector } from "react-redux";

@@ -63,7 +63,7 @@ const Profile = () => {
   return (
     <>
       <div className="w-full grid m-0 ">
-        <Navbar />
+        <Navbar  profile={true}/>
       </div>
 
       <div className="grid-container">

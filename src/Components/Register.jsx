@@ -32,7 +32,6 @@ const Register = ({ page }) => {
       console.log(response, " the response");
       if (response.status === 201) {
         const result = response?.data;
-        console.log(result,' the result')
         // message.success(`welcome ${result.dispatch.name}`);
         dispatch(setLogin(result?.dispatch));
         navigate("/");
@@ -81,7 +80,7 @@ const Register = ({ page }) => {
     <>
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a
-          href="https://www.butomy.com/"
+          href="http://localhost:5173/"
           class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
           {/* <img

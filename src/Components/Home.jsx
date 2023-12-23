@@ -18,7 +18,7 @@ const Home = () => {
   const [expanded, setExpanded] = useState(false);
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [file, setFile] = useState(null);
+  const [emptyBlog, setemptyBlog] = useState(false);
 
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
@@ -29,21 +29,23 @@ const Home = () => {
   // const navigate = useNavigate();
 
   const getAllBlogs = async () => {
-    setLoading(true);
-    const response = await GetAllBlog();
-    if (response.status === 202) {
-      const data = response.data;
-      // if (token) {
-      //   setBlogs(data.result);
-      // } else {
-      //   const firstPart = data.result.slice(0, 3);
-      //   setBlogs(firstPart);
-      // }
-      // setBlogs(response?.data?.)
-      setBlogs(response?.data?.result);
+    try{
+      setLoading(true);
+      const response = await GetAllBlog();
+      if (response.status === 202) {
+        setBlogs(response?.data?.result);
+      } else {
+        setemptyBlog(true)
+      }
+    }catch(error){
+      console.log(error,' error at finding all blogs')
+      Swal.fire({
+        title: "Blog Empty ?",
+        // text: "?",
+        icon: "question"
+      });
+    }finally{
       setLoading(false);
-    } else {
-      console.log("No blog");
     }
   };
 
@@ -52,7 +54,6 @@ const Home = () => {
     if(!title && !summary && !content && !image){
       Swal.fire({
         title: "Blog Empty ?",
-        // text: "?",
         icon: "question"
       });
     }else{
@@ -103,13 +104,14 @@ const Home = () => {
   };
 
   useEffect(() => {
+    console.log(token,' the token consoling ')
     getAllBlogs();
   }, []);
 
   return (
     <>
       <div className="w-full grid m-0 ">
-        <Navbar />
+        <Navbar profile={false}/>
       </div>
 
       <div className="m-6 flex justify-center" onClick={handleOutsideClick}>
@@ -189,10 +191,14 @@ const Home = () => {
           <Loader />
         </div>
       )}
-
+    {emptyBlog &&(
+         <div className="fixed top-0 left-0 right-0 bottom-0 text-rose-500 flex items-center justify-center ">
+          No Blog Found
+       </div>
+    )}
       <div onClick={handleOutsideClick} className=" grid-container" >
         {blogs.map((data) => {
-          return <Post key={data.id} data={data} auther={false} />;
+          return <Post key={data._id} data={data} auther={false} />;
         })}
       </div>
     </>

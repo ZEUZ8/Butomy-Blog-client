@@ -15,7 +15,7 @@ export const BlogCreate = async (data, token) => {
 
 export const GetAllBlog = async () => {
     try {
-        
+
         const response = AxiosURL.get("/");
         return response;
     } catch (error) {

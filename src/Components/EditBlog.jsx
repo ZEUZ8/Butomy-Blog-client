@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { editBlog, DeleteBlog, GetAllBlog } from "../Api/services/blog";
-import { useSelector } from "react-redux"; // Add this line
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaImage } from "react-icons/fa";
 import { convertToBase64 } from "../utils/base64";
@@ -17,7 +17,6 @@ const EditBlog = ({ currentBlog, setCurrentBlog, setUpdate, deleteBlog }) => {
   const [loading,setLoading] = useState(false)
 
   const token = useSelector((state) => state.userLogin.token);
-  const email = useSelector((state) => state.userLogin.email);
   const navigate = useNavigate();
   const handleUpdate = async () => {
     setLoading(true)
